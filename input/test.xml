@@ -1,0 +1,60 @@
+<gte version="0.1">
+  <gameDescription/>
+  <display>
+    <color player="1">#FF0000</color>
+    <color player="2">#0000FF</color>
+    <font>Times</font>
+    <strokeWidth>1</strokeWidth>
+    <nodeDiameter>7</nodeDiameter>
+    <isetDiameter>25</isetDiameter>
+    <levelDistance>75</levelDistance>
+  </display>
+  <players>
+    <player playerId="1">1</player>
+    <player playerId="2">2</player>
+  </players>
+  <extensiveForm>
+    <node player="1">
+      <node iset="1" player="2" move="A">
+        <outcome move="a">
+          <payoff player="1">0</payoff>
+          <payoff player="2">8</payoff>
+        </outcome>
+        <node player="1" move="b">
+          <outcome move="C">
+            <payoff player="1">9</payoff>
+            <payoff player="2">7</payoff>
+          </outcome>
+          <outcome move="D">
+            <payoff player="1">5</payoff>
+            <payoff player="2">3</payoff>
+          </outcome>
+        </node>
+        <node player="1" move="c">
+          <outcome move="E">
+            <payoff player="1">1</payoff>
+            <payoff player="2">1</payoff>
+          </outcome>
+          <outcome move="F">
+            <payoff player="1">9</payoff>
+            <payoff player="2">4</payoff>
+          </outcome>
+        </node>
+      </node>
+      <node iset="1" player="2" move="B">
+        <outcome move="a">
+          <payoff player="1">7</payoff>
+          <payoff player="2">7</payoff>
+        </outcome>
+        <outcome move="b">
+          <payoff player="1">3</payoff>
+          <payoff player="2">2</payoff>
+        </outcome>
+        <outcome move="c">
+          <payoff player="1">5</payoff>
+          <payoff player="2">4</payoff>
+        </outcome>
+      </node>
+    </node>
+  </extensiveForm>
+</gte>
