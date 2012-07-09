@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><gte><extensiveForm>
+<node player="1">
+<node iset="1" move="A" player="2">
+<outcome move="a">
+<payoff player="1" value="0"/>
+<payoff player="2" value="8"/>
+</outcome>
+<node move="b" player="1">
+<outcome move="C">
+<payoff player="1" value="9"/>
+<payoff player="2" value="7"/>
+</outcome>
+<outcome move="D">
+<payoff player="1" value="5"/>
+<payoff player="2" value="3"/>
+</outcome>
+</node>
+<node move="c" player="1">
+<outcome move="E">
+<payoff player="1" value="1"/>
+<payoff player="2" value="1"/>
+</outcome>
+<outcome move="F">
+<payoff player="1" value="9"/>
+<payoff player="2" value="4"/>
+</outcome>
+</node>
+</node>
+<node iset="1" move="B">
+<outcome move="a">
+<payoff player="1" value="7"/>
+<payoff player="2" value="7"/>
+</outcome>
+<outcome move="b">
+<payoff player="1" value="3"/>
+<payoff player="2" value="2"/>
+</outcome>
+<outcome move="c">
+<payoff player="1" value="5"/>
+<payoff player="2" value="4"/>
+</outcome>
+</node>
+</node>
+</extensiveForm></gte>
