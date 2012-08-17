@@ -1,0 +1,94 @@
+<extensiveForm>
+  <node player="1">
+    <node player="2" move="0:0">
+      <node player="1" move="1:0">
+        <node player="2" move="2:0">
+          <node iset="8" player="1" move="11:0">
+            <outcome move="8:0">
+              <payoff player="1" value="19"/>
+              <payoff player="2" value="13"/>
+            </outcome>
+            <outcome move="8:1">
+              <payoff player="1" value="13"/>
+              <payoff player="2" value="13"/>
+            </outcome>
+          </node>
+          <node iset="8" move="11:1">
+            <outcome move="8:0">
+              <payoff player="1" value="11"/>
+              <payoff player="2" value="8"/>
+            </outcome>
+            <outcome move="8:1">
+              <payoff player="1" value="7"/>
+              <payoff player="2" value="8"/>
+            </outcome>
+          </node>
+        </node>
+        <node player="2" move="2:1">
+          <node player="1" move="6:0">
+            <outcome move="10:0">
+              <payoff player="1" value="18"/>
+              <payoff player="2" value="10"/>
+            </outcome>
+            <outcome move="10:1">
+              <payoff player="1" value="7"/>
+              <payoff player="2" value="19"/>
+            </outcome>
+          </node>
+        </node>
+      </node>
+    </node>
+    <node player="2" move="0:1">
+      <outcome move="9:0">
+        <payoff player="1" value="18"/>
+        <payoff player="2" value="17"/>
+      </outcome>
+      <node player="1" move="9:1">
+        <node iset="3" player="2" move="5:0">
+          <node iset="4" player="1" move="3:0">
+            <outcome move="4:0">
+              <payoff player="1" value="17"/>
+              <payoff player="2" value="0"/>
+            </outcome>
+            <outcome move="4:1">
+              <payoff player="1" value="5"/>
+              <payoff player="2" value="16"/>
+            </outcome>
+          </node>
+          <node iset="4" move="3:1">
+            <outcome move="4:0">
+              <payoff player="1" value="4"/>
+              <payoff player="2" value="0"/>
+            </outcome>
+            <outcome move="4:1">
+              <payoff player="1" value="18"/>
+              <payoff player="2" value="18"/>
+            </outcome>
+          </node>
+        </node>
+        <node iset="3" move="5:1">
+          <node iset="7" player="1" move="3:0">
+            <outcome move="7:0">
+              <payoff player="1" value="2"/>
+              <payoff player="2" value="6"/>
+            </outcome>
+            <outcome move="7:1">
+              <payoff player="1" value="5"/>
+              <payoff player="2" value="2"/>
+            </outcome>
+          </node>
+          <node iset="7" move="3:1">
+            <outcome move="7:0">
+              <payoff player="1" value="14"/>
+              <payoff player="2" value="10"/>
+            </outcome>
+            <outcome move="7:1">
+              <payoff player="1" value="14"/>
+              <payoff player="2" value="0"/>
+            </outcome>
+          </node>
+        </node>
+      </node>
+    </node>
+  </node>
+</extensiveForm>
