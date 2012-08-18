@@ -68,8 +68,8 @@ public class Reduced4Gambit {
 			ExtensiveFormXMLReader reader = new ExtensiveFormXMLReader();
 			tree = reader.load(doc);
 			ReducedForm reducedForm = new ReducedForm(tree);
-			reducedForm.printOriginalSystem();
-			reducedForm.printReducedSystem();
+//			reducedForm.printOriginalSystem();
+//			reducedForm.printReducedSystem();
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
