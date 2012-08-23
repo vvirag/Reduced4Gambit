@@ -5,25 +5,29 @@ Simple application to demonstrate the usage of the reduced form (based on gte/li
 
 I. PREREQUISITES
 
-1. Set up your greenvirag/gte repository to build lib-algo.jar
-Follow this: https://github.com/greenvirag/gte/blob/master/README
+1. Download greenvirag/gte repository (needed to build lib-algo.jar)
+Available here: https://github.com/greenvirag/gte
+Additional settings for this project is not needed (no JETTY, no FLEX, etc.).
 
-2. Go to exe directory, and edit your build.xml file.
-Set up the correct path to Reduced4Gambit and also for the project from the 1st step (where the lib-algo.jar will be built).
+2. Update build.properties for your environment
+Set up the correct path to the previously downloaded project
 
 
 II. BUILD
 
 Open terminal:
 
-= Bulding lib-algo.jar =
-$ cd <greenvirag/gte project root directory>
-$ ant compile-core clean
-$ ant compile-core
-$ ant package-core
-
-= Building Reduced4Gambit (which needs an available lib-algo.jar) =
-$ cd <greenvirag/Reduced4Gambit project root directory>/exe
+$ cd <Reduced4Gambit project root directory>
 $ ant
 
 When ant is running, you should see the corresponding build.xml script being executed.
+
+
+III. RUN
+
+An example how to run the built in example file:
+
+$ cd <Reduced4Gambit project root directory>
+$ java -jar bin/Reduced4Gambit.jar --lrs-path ./bin/ input/test2.xml
+
+
