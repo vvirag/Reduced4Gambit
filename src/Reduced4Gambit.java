@@ -32,12 +32,37 @@ public class Reduced4Gambit {
 	 */
 	public static void main(String[] args) {
 		
+		String help = "Usage: java -jar Reduced4Gambit.jar [options] [FILE]";
+		help += "\nOptions:";
+		help += "\n--lrs-path PATH \t#Sets the path to the lrs binary#";
+		help += "\n-l PATH \t\t#Sets the path to the lrs binary#";
+		help += "\n\nEXAMPLE";
+		help += "\nReduced4Gambit$ java -jar bin/Reduced4Gambit.jar -l ./bin/ input/test2.xml";
+		
 		if (args.length < 1 || args[0].equalsIgnoreCase("--help") || args[0].equalsIgnoreCase("-h")) {
-			System.out.println("Usage: java -jar Reduced4Gambit.jar [FILE]");
+			System.out.println(help);
 			return;
 		}
 
-		File file = new File(args[0]);
+		String lrsDir = ".";
+		String input = "";
+		
+		if (args[0].equalsIgnoreCase("--lrs-path") || args[0].equalsIgnoreCase("-l")) {
+			if (args.length < 3) {
+				System.out.println(help);
+				return;
+			} else {
+				lrsDir = args[1];
+				input = args[2];
+			}
+		} else {
+			input = args[0];
+		}
+		
+		System.out.println("Path to the lrs binary is set: " + lrsDir);
+		System.out.println("Input file: " + input);
+		
+		File file = new File(input);
 		
 		/* load XML into ExtensiveForm returning any errors */
 		ExtensiveForm tree = null;
@@ -68,6 +93,7 @@ public class Reduced4Gambit {
 			ExtensiveFormXMLReader reader = new ExtensiveFormXMLReader();
 			tree = reader.load(doc);
 			ReducedForm reducedForm = new ReducedForm(tree);
+			reducedForm.setLrsPath(lrsDir);
 			reducedForm.printOriginalSystem();
 			reducedForm.printReducedSystem();
 			reducedForm.findEqLrs();

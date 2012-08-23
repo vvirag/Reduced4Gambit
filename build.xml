@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Build file for Reduced4Gambit
+	@author Virag Varga
+
+	ANT 1.7 is required
+-->
+<project name="Reduced4Gambit" basedir="." default="main" >
+
+	<!-- setup a prefix for all environment variables -->
+	<property file="build.properties" />	
+
+	<property name="src.dir" value="src"/>
+	<property name="bin.dir" value="bin"/>
+	<property name="build.dir" value="build"/>
+	<property name="lib.dir" value="${GTE_HOME}/lib-algo"/>
+
+	<target name="main" depends="clean, package">
+		<echo>Finished</echo>
+	</target>
+	
+	<target name="setup">
+		<mkdir dir="${build.dir}"/>
+	</target>
+	
+	<target name="clean">		
+		<delete dir="${build.dir}"/>
+	</target>
+
+   <target name="compile" depends="setup">
+		<echo>Compiling project...</echo>
+        <javac
+			srcdir="${src.dir}"
+			destdir="${build.dir}"
+			includeAntRuntime="false"
+		/>
+    </target>
+
+	<target name="lib-algo" depends="setup">
+		<echo>Compiling core library...</echo>
+		<javac 
+			srcdir="${lib.dir}/src" 
+			destdir="${build.dir}"
+			includeAntRuntime="false"
+		/>
+	</target>
+
+    <target name="package" depends="setup, lib-algo, compile">
+		<echo>Making package...</echo>
+        <jar destfile="${bin.dir}/Reduced4Gambit.jar">
+            <manifest>
+                <attribute name="Main-Class" value="Reduced4Gambit"/>
+                <attribute name="Class-Path" value=". lib-algo.jar"/>
+            </manifest>
+            <fileset dir="${build.dir}"/>
+        </jar>
+    </target>
+</project>
