@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -14,13 +13,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import lse.math.games.LogUtils;
 import lse.math.games.io.ExtensiveFormXMLReader;
 import lse.math.games.reduced.ReducedForm;
 import lse.math.games.tree.ExtensiveForm;
 import lse.math.games.tree.SequenceForm.ImperfectRecallException;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
  
@@ -32,71 +31,96 @@ public class Reduced4Gambit {
 	 */
 	public static void main(String[] args) {
 		
-		String help = "Usage: java -jar Reduced4Gambit.jar [options] [FILE]";
-		help += "\nOptions:";
-		help += "\n--lrs-path PATH \t#Sets the path to the lrs binary#";
-		help += "\n-l PATH \t\t#Sets the path to the lrs binary#";
+		String help = "USAGE\njava -jar Reduced4Gambit.jar [options] [FILE]";
+		help += "\n\nOPTIONS";
+		help += "\n-lrs --lrs-path PATH \t#Sets the path to the lrs binary#";
+		help += "\n-log --log-level VALUE \t#Sets the log level (VALUE in {0,1,2,3,4} where \n" +
+				"\t\t\t  0 MINIMAL\n" +
+				"\t\t\t  1 SHORT\n" +
+				"\t\t\t  2 DETAILED\n" +
+				"\t\t\t  3 DEBUG" +" )#";
+		help += "\n-h --help \t\t#Prints this message#";
 		help += "\n\nEXAMPLE";
 		help += "\nReduced4Gambit$ java -jar bin/Reduced4Gambit.jar -l ./bin/ input/test2.xml";
 		
-		if (args.length < 1 || args[0].equalsIgnoreCase("--help") || args[0].equalsIgnoreCase("-h")) {
-			System.out.println(help);
-			return;
-		}
-
 		String lrsDir = ".";
 		String input = "";
+		Integer loglevel = 0;
 		
-		if (args[0].equalsIgnoreCase("--lrs-path") || args[0].equalsIgnoreCase("-l")) {
-			if (args.length < 3) {
+		int i = 0;
+		while (i < args.length) {
+		
+			if (args[i].equalsIgnoreCase("--help") || args[i].equalsIgnoreCase("-h")) {
 				System.out.println(help);
 				return;
-			} else {
-				lrsDir = args[1];
-				input = args[2];
 			}
-		} else {
-			input = args[0];
+			
+			if (args[i].equalsIgnoreCase("--lrs-path") || args[i].equalsIgnoreCase("-lrs")) {
+				if (i+1 >= args.length) {
+					System.out.println(help);
+					return;
+				} else {
+					lrsDir = args[i+1];
+					i+=2;
+					continue;
+				}
+			}
+			
+			if (args[i].equalsIgnoreCase("--log-level") || args[i].equalsIgnoreCase("-log")) {
+				if (i+1 >= args.length) {
+					System.out.println(help);
+					return;
+				} else {
+					loglevel = Integer.parseInt(args[i+1]);
+					i+=2;
+					continue;
+				}
+			}
+			
+			break;
 		}
 		
-		System.out.println("Path to the lrs binary is set: " + lrsDir);
-		System.out.println("Input file: " + input);
+		if (i != args.length-1) {
+			System.out.println(help);
+			return;			
+		}
+		input = args[i];
+		
+		LogUtils.currentLogLevel = LogUtils.LogLevel.getFromInteger(loglevel);
+		
+		System.out.println("================================");
+		System.out.println("Log level is: " + loglevel + " (" + LogUtils.currentLogLevel.name() + ")");
+		System.out.println("Path to the lrs binary is: " + lrsDir);
+		System.out.println("The input file is: " + input);
+		System.out.println("================================\n");
 		
 		File file = new File(input);
-		
-		/* load XML into ExtensiveForm returning any errors */
 		ExtensiveForm tree = null;
 		
 		try {
+			/* Parse file */
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = builder.parse(file);
 			
-//			Node subroot = getExtensiveForm(doc.getFirstChild());
-//			if (subroot == null) {
-//				System.out.println("Subroot is null.");
-//			} else {
-//				System.out.println("Subroot is " + subroot);
-//			}
-//			System.out.println("Original doc element: " + doc.getDocumentElement());
-//
-//			Document doc2 = builder.newDocument();
-//			Element root = doc2.createElement("gte");
-//			doc2.appendChild(root);
-//			Node newroot = doc2.importNode(subroot, true);
-//		    doc2.getDocumentElement().appendChild(newroot);
-//		    System.out.println("New doc element: " + doc2.getDocumentElement());
-//		    
-//		    writeXmlFile(doc2, "output.xml");
-//            
-//		    System.out.println(doc2.toString());
-		    
+			/* Process with ExtensiveFormXMLReader */
 			ExtensiveFormXMLReader reader = new ExtensiveFormXMLReader();
 			tree = reader.load(doc);
+			
+			/* Create a ReducedForm type variable*/
 			ReducedForm reducedForm = new ReducedForm(tree);
+			
+			/* Set the path to the lrs binary */
 			reducedForm.setLrsPath(lrsDir);
+			
+			/* Print the variables of the original system */
 			reducedForm.printOriginalSystem();
+			
+			/* Print the variables of the reduced system */
 			reducedForm.printReducedSystem();
+			
+			/* Find all equilibria based on reduced system + lrs search */
 			reducedForm.findEqLrs();
+			
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

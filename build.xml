@@ -50,7 +50,6 @@
         <jar destfile="${bin.dir}/Reduced4Gambit.jar">
             <manifest>
                 <attribute name="Main-Class" value="Reduced4Gambit"/>
-                <attribute name="Class-Path" value=". lib-algo.jar"/>
             </manifest>
             <fileset dir="${build.dir}"/>
         </jar>

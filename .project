@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>lib-algo</name>
+			<type>2</type>
+			<location>/home/greenvirag/Projects/Gambit/gte-greenvirag/lib-algo/src</location>
+		</link>
+	</linkedResources>
 </projectDescription>
