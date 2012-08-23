@@ -28,6 +28,6 @@ III. RUN
 An example how to run the built in example file:
 
 $ cd <Reduced4Gambit project root directory>
-$ java -jar bin/Reduced4Gambit.jar --lrs-path ./bin/ input/test2.xml
+$ java -jar bin/Reduced4Gambit.jar --log-level 1 --lrs-path ./bin/ input/test2.xml
 
 
